@@ -43,14 +43,17 @@ enum layers {
 #define KC_ADEN LT(_ADJUST, KC_END)
 #define KC_ADPU LT(_ADJUST, KC_PGUP) 
 
-#define COPY    LCTL(KC_C)                            //STRG + C
-#define PASTE   LCTL(KC_V)                            //STRG + V
+
 
 #define WD_LEFT     LGUI(LCTL(KC_LEFT))               //Windows + ALT + Links
 #define WD_RIGHT     LGUI(LCTL(KC_RGHT))              //Windows + ALT + Links
 
 #define ALG_TAB  ALGR(KC_TAB)                          //ALT GR + TAB
 
+
+#define COPY    LCTL(KC_C)                            //STRG + C
+#define PASTE   LCTL(KC_V)                            //STRG + V
+#define CUT     LCTL(KC_X)                            //STRG + X
 
 #define LSFTD     LSFT_T(KC_D)	                     //Left Shift when held, D when tapped
 #define RSFTK     RSFT_T(KC_K)	                     //Right Shift when held, K when tapped
@@ -59,11 +62,11 @@ enum layers {
 #define LALTS     LALT_T(KC_S)                        //Left Alt when held, S when tapped
 #define RALTL     RALT_T(KC_L)                        //Right Alt when held, L when tapped
 #define LWINA     LGUI_T(KC_A)                        //Left GUI when held, A when tapped
-#define RWINO     RGUI_T(KC_SCLN)                     //Right GUI when held, OE when tapped
+#define RWINO     RGUI_T(DE_ODIA)                     //Right GUI when held, OE when tapped
 
 #define L_MAIN    TO(_QWERTZ)                         //Toggle Layer QWERTZ
-#define L_COD     TG(_CODING)                         //Toggle Layer CODING
-#define L_NAV     TG(_NAV)                            //Toggle Layer NAV
+#define L_COD     MO(_CODING)                         //Toggle Layer CODING
+#define L_NAV     MO(_NAV)                            //Toggle Layer NAV
 
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -86,28 +89,28 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                                           ┌────────┬────────┬────────┬────────┬────────┬────────┐
      XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,                                            XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐                         ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     XXXXXXX  ,KC_Q    ,KC_W    ,KC_E    ,KC_R    ,KC_T   ,XXXXXXX ,                          XXXXXXX ,DE_Z    ,KC_U    ,KC_I    ,KC_O    ,KC_P    ,KC_LBRC ,
+     KC_ESC  ,KC_Q    ,KC_W    ,KC_E    ,KC_R    ,KC_T   ,XXXXXXX ,                          XXXXXXX ,DE_Z    ,KC_U    ,KC_I    ,KC_O    ,KC_P    ,DE_UDIA ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┤                         ├────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     XXXXXXX  ,LWINA  ,LALTS   ,LSFTD   ,LSTRF   ,KC_G    ,XXXXXXX ,                         XXXXXXX  ,KC_H    ,RSTRJ   ,RSFTK   ,RALTL   ,RWINO   ,KC_QUOT ,
+     KC_TAB  ,LWINA  ,LALTS   ,LSFTD   ,LSTRF   ,KC_G    ,CUT     ,                         XXXXXXX  ,KC_H    ,RSTRJ   ,RSFTK   ,RALTL   ,RWINO   ,DE_ADIA ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┐       ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      XXXXXXX ,DE_Y    ,KC_X    ,KC_C    ,KC_V    ,KC_B    ,COPY    ,PASTE   ,       XXXXXXX  ,XXXXXXX ,KC_N    ,KC_M    ,KC_COMM ,KC_DOT  ,KC_SLSH ,KC_RSFT ,
   //├────────┼────────┼────────┼────────┼────┬───┴────┬───┼────────┼────────┤       ├────────┼────────┼───┬────┴───┬────┼────────┼────────┼────────┼────────┤
-     XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,     KC_SPC     ,KC_LSFT  ,XXXXXXX  ,      L_COD ,KC_ENT ,    KC_BSPC   ,     WD_LEFT  ,XXXXXXX ,XXXXXXX   ,WD_RIGHT 
+     XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,     KC_SPC      ,L_NAV  ,XXXXXXX  ,       L_COD    ,KC_ENT  ,    KC_BSPC      ,WD_LEFT ,XXXXXXX ,XXXXXXX ,WD_RIGHT 
   //└────────┴────────┴────────┴────────┘    └────────┘   └────────┴────────┘       └────────┴────────┘   └────────┘    └────────┴────────┴────────┴────────┘
   ),
 
   [_CODING] = LAYOUT(
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                                           ┌────────┬────────┬────────┬────────┬────────┬────────┐
-     XXXXXXX ,KC_F1   ,KC_F2   ,KC_F3   ,KC_F4   ,KC_F5   ,                                            KC_F6   ,KC_F7   ,KC_F8   ,KC_F9   ,KC_F10  ,XXXXXXX ,
+     XXXXXXX ,KC_F1   ,KC_F2   ,KC_F3   ,KC_F4   ,KC_F5   ,                                            KC_F6   ,KC_F7   ,KC_F8   ,KC_F9   ,KC_F10  ,KC_F11 ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐                         ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     XXXXXXX ,DE_AT   ,DE_LCBR ,DE_RCBR ,DE_LPRN ,DE_RPRN ,XXXXXXX ,                          XXXXXXX ,KC_PSLS ,KC_P7   ,KC_P8   ,KC_P9   ,KC_PMNS ,XXXXXXX ,
+     XXXXXXX ,DE_AT   ,DE_LCBR ,DE_RCBR ,DE_LPRN ,DE_RPRN ,XXXXXXX ,                          XXXXXXX ,KC_PSLS ,KC_7   ,KC_8   ,KC_9   ,KC_PMNS ,KC_F12,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┤                         ├────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     XXXXXXX ,DE_PIPE ,DE_PERC ,DE_SCLN ,DE_ASTR ,DE_UNDS ,KC_HASH ,                          XXXXXXX ,KC_PAST ,KC_P4   ,KC_P5   ,KC_P6   ,KC_PPLS ,XXXXXXX ,
+     XXXXXXX ,DE_PIPE ,DE_PERC ,DE_SCLN ,DE_ASTR ,DE_UNDS ,KC_HASH ,                          XXXXXXX ,KC_PAST ,KC_4   ,KC_5   ,KC_6   ,KC_PPLS ,XXXXXXX ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┐       ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     XXXXXXX ,DE_LBRC ,DE_RBRC ,DE_DQUO ,DE_QUOT ,DE_QUES ,_______ ,_______ ,        XXXXXXX ,XXXXXXX ,XXXXXXX ,KC_P1   ,KC_P2   ,KC_P3   ,KC_PENT ,XXXXXXX ,
+     XXXXXXX ,DE_LBRC ,DE_RBRC ,DE_DQUO ,DE_QUOT ,DE_QUES ,_______ ,_______ ,        XXXXXXX ,XXXXXXX ,XXXXXXX ,KC_1   ,KC_2   ,KC_3   ,KC_PENT ,XXXXXXX ,
   //├────────┼────────┼────────┼────────┼────┬───┴────┬───┼────────┼────────┤       ├────────┼────────┼───┬────┴───┬────┼────────┼────────┼────────┼────────┤
-     XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,     _______ ,    KC_LT   ,L_MAIN   ,        L_NAV ,_______ ,    _______   ,     KC_P0   ,KC_PDOT ,KC_PENT ,XXXXXXX 
-  //└────────┴────────┴────────┴────────┘    └────────┘   └────────┴────────┘       └────────┴────────┘   └────────┘    └────────┴────────┴────────┴────────┘
+     XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,     _______ ,    _______   ,   ,         ,_______ ,    _______   ,     KC_0   ,KC_PDOT ,KC_PENT ,XXXXXXX 
+  //└────────┴────────┴────────┴────────┘    └────────┘   └────────┴────────┘       └────────┴────────┘   └────────┘    └────────┴────────┴────────┴────────┘ 
   ), 
 
   [_NAV] = LAYOUT(
@@ -118,10 +121,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┤                         ├────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      XXXXXXX ,KC_MS_L ,KC_MS_D ,KC_MS_R ,KC_WH_D ,XXXXXXX ,_______ ,                          _______ ,KC_DEL  ,KC_LEFT ,KC_DOWN ,KC_RIGHT,KC_PGDN ,XXXXXXX ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┐       ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,_______    ,_______   ,        _______ ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,
+     XXXXXXX ,XXXXXXX ,KC_BTN1 ,KC_BTN2 ,XXXXXXX ,XXXXXXX ,_______    ,_______   ,        _______ ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,
   //├────────┼────────┼────────┼────────┼────┬───┴────┬───┼────────┼────────┤       ├────────┼────────┼───┬────┴───┬────┼────────┼────────┼────────┼────────┤
-     XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,     KC_BTN1 ,    KC_BTN2 ,L_MAIN  ,        _______ ,_______ ,    XXXXXXX ,     XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX 
+     XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,      ,     ,L_MAIN  ,        _______ ,_______ ,    _______ ,     XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX 
   //└────────┴────────┴────────┴────────┘    └────────┘   └────────┴────────┘       └────────┴────────┘   └────────┘    └────────┴────────┴────────┴────────┘
   ),
 
+};
+
+
+const uint16_t PROGMEM semicolon[] = {KC_COMM, KC_DOT, COMBO_END};
+
+combo_t key_combos[] = {
+    COMBO(semicolon, DE_SCLN),
 };
