@@ -65,8 +65,11 @@ enum layers {
 #define RWINO     RGUI_T(DE_ODIA)                     //Right GUI when held, OE when tapped
 
 #define L_MAIN    TO(_QWERTZ)                         //Toggle Layer QWERTZ
-#define L_COD     MO(_CODING)                         //Toggle Layer CODING
+#define L_COD     LT(_CODING, KC_TRNS)                     //Toggle Layer CODING
 #define L_NAV     MO(_NAV)                            //Toggle Layer NAV
+
+#define LAYER_ID 1        // Dein Ziel-Layer
+#define TAP_TERM_MS 200   // Ab wann wir es als "Hold" betrachten
 
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -135,3 +138,34 @@ const uint16_t PROGMEM semicolon[] = {KC_COMM, KC_DOT, COMBO_END};
 combo_t key_combos[] = {
     COMBO(semicolon, DE_SCLN),
 };
+
+
+#include "quantum.h"
+
+// Globale Variable für den Layer-Zustand nach kurzem Drücken
+bool tap_layer_active = false;
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    // Definieren der Taste, die das Umschalten auslöst (in diesem Beispiel LT(1, KC_TRNS))
+    if (keycode == LT(_CODING, KC_TRNS)) {
+        // Bei Loslassen der Taste
+        if (record->event.pressed == false) {
+            // Prüfen, ob es ein Tap (kurzes Drücken) war
+            if (record->tap.count > 0 && record->tap.interrupted == false) {
+                // Layer umschalten
+                layer_on(_CODING);
+                tap_layer_active = true;
+                return false; // Verhindert, dass QMK die standardmäßige LT-Hold-Funktion ausführt
+            }
+        }
+    }
+
+    // Wenn irgendeine andere Taste gedrückt wird und der Tap-Layer aktiv ist
+    if (tap_layer_active && keycode != LT(_CODING, KC_TRNS) && record->event.pressed == true) {
+        // Layer zurückschalten und Flag zurücksetzen
+        layer_off(_CODING);
+        tap_layer_active = false;
+    }
+
+    return true;
+}
